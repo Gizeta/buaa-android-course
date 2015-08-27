@@ -1,0 +1,100 @@
+@import 'font.css';
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    overflow-x: hidden;
+    font-family: Microsoft Yahei;
+    -webkit-touch-callout: none !important;
+}
+
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+    -webkit-user-select: none !important;
+    color: black;
+}
+
+a:active {
+    -webkit-transform: scale3d(0.9, 0.9, 1);
+    color: black;
+}
+
+#cover {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 36%;
+    overflow: hidden;
+    z-index: 10;
+}
+
+#cover img {
+    -webkit-animation-name: breathe;
+    -webkit-animation-direction: alternate-reverse;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: 30s;
+
+    animation-name: breathe;
+    animation-direction: alternate-reverse;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 30s;
+}
+
+@-webkit-keyframes breathe {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1.4);
+        transform: scale(1.4);
+    }
+}
+
+@keyframes breathe {
+    0% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(1.4);
+        transform: scale(1.4);
+    }
+}
+
+#playlist {
+    position: absolute;
+    top: 36%;
+    width: 100%;
+    padding-bottom: 127px;
+    z-index: 1;
+}
+
+#playlist li:nth-child(odd) {
+    background-color: #F2F2F2;
+}
+
+#playlist .playing {
+    color: #2967CC;
+}
+
+#control {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 127px;
+    z-index: 20;
+    background-color: rgba(52, 111, 207, 0.95);
+    color: white;
+}
+
+#control a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+#control a:active {
+    color: #7AA1E0;
+}

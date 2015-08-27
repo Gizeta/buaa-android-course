@@ -2,11 +2,18 @@
 <html>
     <head>
         <title>Clarinetto</title>
-        <meta name="viewport" content="width=device-width,user-scalable-no" />
+        <meta name="viewport" content="width=device-width,user-scalable=no" />
+        <link rel="stylesheet" href="./stylesheets/main.css" />
+        <script src="./scripts/react-with-addons.min.js"></script>
+        <script src="./scripts/JSXTransformer.js"></script>
     </head>
     <body>
-        <div>
-            Hello World.
-        </div>
+        <div id="cover"></div>
+        <div id="playlist"></div>
+        <div id="control"></div>
+        <script type="text/jsx" src="./components/cover.jsx"></script>
+        <script type="text/jsx" src="./components/playlist.jsx"></script>
+        <script type="text/jsx" src="./components/control.jsx"></script>
+        <script src="./scripts/main.js"></script>
     </body>
 </html>
