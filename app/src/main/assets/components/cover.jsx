@@ -2,14 +2,14 @@ var Cover = React.createClass({
     propTypes: {
         image: React.PropTypes.string,
         title: React.PropTypes.string,
-        singer: React.PropTypes.string
+        artist: React.PropTypes.string
     },
 
     getDefaultProps: function() {
         return {
-            image: './images/cover.jpg',
-            title: 'streaming',
-            singer: 'N-Driver'
+            image: null,
+            title: '',
+            artist: ''
         };
     },
 
@@ -46,9 +46,13 @@ var Cover = React.createClass({
                 fontWeight: 'bold',
                 fontSize: '120%'
             },
-            singer: {
+            artist: {
             }
         };
+    },
+
+    componentDidMount: function() {
+        Backend.LoadInitialMusic();
     },
 
     render: function() {
@@ -56,19 +60,19 @@ var Cover = React.createClass({
 
         return (
             <div style={styles.root}>
-                <img style={styles.image} src={this.props.image} />
+                <img style={styles.image} src={this.props.image || "./images/cover.jpg"} />
                 <div style={styles.coverOverlay} />
                 <div style={styles.coverOverlay2} />
                 <div style={styles.detail}>
                     <div style={styles.title}>{this.props.title}</div>
-                    <div style={styles.singer}>{this.props.singer}</div>
+                    <div style={styles.artist}>{this.props.artist}</div>
                 </div>
             </div>
         );
     }
 });
 
-React.render(
+Clarinetto.controls.cover = React.render(
     <Cover />,
     document.getElementById('cover')
 );

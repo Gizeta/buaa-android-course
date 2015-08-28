@@ -26,7 +26,10 @@
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
     /* Support for Safari and Chrome. */
-    text-rendering: optimizeLegibility;
+    /* error in android 4.2.2 */
+    /* text-rendering: optimizeLegibility; */
+    
+    text-rendering: auto;
 
     /* Support for Firefox. */
     -moz-osx-font-smoothing: grayscale;

@@ -15,8 +15,41 @@ a {
 }
 
 a:active {
-    -webkit-transform: scale3d(0.9, 0.9, 1);
+    -webkit-transform: scale3d(0.95, 0.9, 1);
     color: black;
+}
+
+.hbox, .vbox {
+    display: box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.vbox {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.box-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.flex-grow1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
 }
 
 #cover {
@@ -74,10 +107,6 @@ a:active {
 
 #playlist li:nth-child(odd) {
     background-color: #F2F2F2;
-}
-
-#playlist .playing {
-    color: #2967CC;
 }
 
 #control {

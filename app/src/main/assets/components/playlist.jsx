@@ -1,38 +1,14 @@
 var PlayList = React.createClass({
     propTypes: {
         list: React.PropTypes.array,
-        now: React.PropTypes.number
+        now: React.PropTypes.number,
+        onSelect: React.PropTypes.func
     },
 
     getDefaultProps: function() {
         return {
-            list: [
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-                'abc中文test',
-            ],
-            now: 2
+            list: [],
+            now: -1
         };
     },
 
@@ -46,10 +22,13 @@ var PlayList = React.createClass({
                 listStyleType: 'none',
                 padding: 0,
                 width: '100%',
-                height: 58
+                height: 58,
+                overflow: 'hidden'
             },
             link: {
-                textDecoration: 'none'
+                textDecoration: 'none',
+                display: 'block',
+                height: '100%'
             },
             detail: {
                 width: '100%',
@@ -62,59 +41,85 @@ var PlayList = React.createClass({
                 marginLeft: 3,
                 marginTop: 3
             },
-            singer: {
+            artist: {
                 position: 'absolute',
                 marginTop: -6,
                 color: '#666666'
+            },
+            playing: {
+                color: '#2967CC'
+            },
+            artistPlaying: {
+                position: 'absolute',
+                marginTop: -5,
+                marginLeft: 3,
+                color: '#2967CC'
             }
         };
     },
 
+    componentDidMount: function() {
+        Backend.UpdateMusicList();
+    },
+
     render: function() {
         var styles = this.getStyles();
-        var p = this.props;
+        var that = this;
 
         return (
             <ul style={styles.container}>
                 {
-                    p.list.map(function(title, index) {
+                    that.props.list.map(function(item, index) {
                         var detail;
-                        if (p.now == index) {
+                        if (that.props.now == index) {
                             detail = (
-                                <div style={styles.detail} className='playing'>
-                                    <div>
+                                <div id={'m' + index} style={styles.detail}>
+                                    <div style={styles.playing}>
                                         <i className="material-icons">&#xE023;</i>
-                                        <span style={styles.title}>{title}</span>
+                                        <span style={styles.title}>{item.title}</span>
                                     </div>
-                                    <div style={styles.singer}>{title}</div>
+                                    <div style={styles.artistPlaying}>{item.artist}</div>
                                 </div>
                             );
                         }
                         else {
                             detail = (
-                                <div style={styles.detail}>
+                                <div id={'m' + index} style={styles.detail}>
                                     <div>
                                         <i className="material-icons">&#xE03D;</i>
-                                        <span style={styles.title}>{title}</span>
+                                        <span style={styles.title}>{item.title}</span>
                                     </div>
-                                    <div style={styles.singer}>{title}</div>
+                                    <div style={styles.artist}>{item.artist}</div>
                                 </div>
                             );
                         }
 
                         return (
                             <li style={styles.item}>
-                                <a style={styles.link} href="#" ontouchstart="return true;">{detail}</a>
+                                <a style={styles.link} href="javascript:void(0);" ontouchstart="return true;" onClick={that._onSelect.bind(this, index)}>{detail}</a>
                             </li>
                         );
                     })
                 }
+
             </ul>
         );
+    },
+
+    _onSelect: function(e) {
+        if (this.props.onSelect) {
+            this.props.onSelect(e);
+        }
     }
 });
 
-React.render(
+Clarinetto.controls.playlist = React.render(
     <PlayList />,
     document.getElementById('playlist')
 );
+
+Clarinetto.controls.playlist.setProps({
+    onSelect: function(idx) {
+        Backend.PlayMusic(idx);
+    }
+});

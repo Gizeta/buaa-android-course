@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 16
+    compileSdkVersion 17
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "org.gizeta.clarinetto"
-        minSdkVersion 16
-        targetSdkVersion 16
+        minSdkVersion 17
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
     }
