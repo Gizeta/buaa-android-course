@@ -8,9 +8,12 @@ html, body {
     -webkit-touch-callout: none !important;
 }
 
-a {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+a, div, span {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-user-select: none !important;
+}
+
+a {
     color: black;
 }
 
@@ -63,16 +66,16 @@ a:active {
 
 #cover img {
     -webkit-animation-name: breathe;
-    -webkit-animation-direction: alternate-reverse;
+    -webkit-animation-direction: alternate;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
-    -webkit-animation-duration: 30s;
+    -webkit-animation-duration: 60s;
 
     animation-name: breathe;
-    animation-direction: alternate-reverse;
+    animation-direction: alternate;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    animation-duration: 30s;
+    animation-duration: 60s;
 }
 
 @-webkit-keyframes breathe {
@@ -80,9 +83,13 @@ a:active {
         -webkit-transform: scale(1);
         transform: scale(1);
     }
-    100% {
+    50% {
         -webkit-transform: scale(1.4);
         transform: scale(1.4);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }
 
@@ -91,9 +98,13 @@ a:active {
         -webkit-transform: scale(1);
         transform: scale(1);
     }
-    100% {
+    50% {
         -webkit-transform: scale(1.4);
         transform: scale(1.4);
+    }
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
     }
 }
 
@@ -120,7 +131,6 @@ a:active {
 }
 
 #control a {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     color: white;
 }
 

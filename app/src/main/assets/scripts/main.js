@@ -10,8 +10,9 @@ if (window.Clarinetto == undefined) {
             Pause: function() { },
             PlayPrevious: function() { },
             PlayNext: function() { },
-            PlayMusic: function() { },
-            LoadInitialMusic: function() { }
+            PlayMusic: function(e) { },
+            LoadInitialMusic: function() { },
+            Seek: function(e) { }
         }
     }
 

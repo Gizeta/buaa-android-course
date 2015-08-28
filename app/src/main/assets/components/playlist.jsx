@@ -96,7 +96,7 @@ var PlayList = React.createClass({
 
                         return (
                             <li style={styles.item}>
-                                <a style={styles.link} href="javascript:void(0);" ontouchstart="return true;" onClick={that._onSelect.bind(this, index)}>{detail}</a>
+                                <a style={styles.link} href="javascript:void(0);" onClick={that._onSelect.bind(this, index)}>{detail}</a>
                             </li>
                         );
                     })

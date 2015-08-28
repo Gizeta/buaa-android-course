@@ -17,6 +17,15 @@ var Control = React.createClass({
         };
     },
 
+    getInitialState: function() {
+        return {
+            left: null,
+            right: null,
+            position: 0,
+            width: 0
+        };
+    },
+
     getStyles: function() {
         return {
             root: {
@@ -36,14 +45,14 @@ var Control = React.createClass({
                 background: 'white'
             },
             leftTSlider: {
-                WebkitBoxFlex: this.props.position,
-                WebkitFlex: this.props.position,
-                flex: this.props.position
+                WebkitBoxFlex: this.state.left || this.props.position,
+                WebkitFlex: this.state.left || this.props.position,
+                flex: this.state.left || this.props.position
             },
             rightTSlider: {
-                WebkitBoxFlex: this.props.duration - this.props.position,
-                WebkitFlex: this.props.duration - this.props.position,
-                flex: this.props.duration - this.props.position
+                WebkitBoxFlex: this.state.right || this.props.duration - this.props.position,
+                WebkitFlex: this.state.right || this.props.duration - this.props.position,
+                flex: this.state.right || this.props.duration - this.props.position
             },
             tThumb: {
                 width: 10,
@@ -52,6 +61,14 @@ var Control = React.createClass({
                 borderRadius: 7,
                 background: 'rgb(52, 111, 207)',
                 marginTop: -5
+            },
+            tThumbHover: {
+                width: 12,
+                height: 12,
+                border: '2px solid white',
+                borderRadius: 8,
+                background: 'rgb(255, 255, 255)',
+                marginTop: -6
             },
             buttons: {
             }
@@ -72,20 +89,20 @@ var Control = React.createClass({
         return (
             <div style={styles.root} className="vbox">
                 <div style={styles.time} className="hbox box-center">
-                    <span>{this.toTimeString(this.props.position)}</span>
-                    <div style={styles.tSlider} className="hbox">
+                    <span>{this.toTimeString(this.state.left || this.props.position)}</span>
+                    <div style={styles.tSlider} className="hbox" ref="slider">
                         <div style={styles.leftTSlider}></div>
-                        <div style={styles.tThumb}></div>
+                        <div style={this.state.left == null ? styles.tThumb : styles.tThumbHover} onTouchStart={this._onTouchStart} onTouchMove={this._onTouchMove} onTouchEnd={this._onTouchEnd}></div>
                         <div style={styles.rightTSlider}></div>
                     </div>
                     <span>{this.toTimeString(this.props.duration)}</span>
                 </div>
                 <div style={styles.buttons} className="hbox box-center">
-                    <a href="javascript:void(0);" ontouchstart="return true;" onClick={this._onPrevious}><i className="material-icons">&#xE045;</i></a>
+                    <a href="javascript:void(0);" onClick={this._onPrevious}><i className="material-icons">&#xE045;</i></a>
                     <div className="flex-grow1"></div>
-                    <a href="javascript:void(0);" ontouchstart="return true;" onClick={this._onPlayPause}>{playBtn}</a>
+                    <a href="javascript:void(0);" onClick={this._onPlayPause}>{playBtn}</a>
                     <div className="flex-grow1"></div>
-                    <a href="javascript:void(0);" ontouchstart="return true;" onClick={this._onNext}><i className="material-icons">&#xE044;</i></a>
+                    <a href="javascript:void(0);" onClick={this._onNext}><i className="material-icons">&#xE044;</i></a>
                 </div>
             </div>
         );
@@ -125,6 +142,41 @@ var Control = React.createClass({
             this.props.onNext();
         }
     },
+
+    _onTouchStart: function(e) {
+        this.setState({
+            left: this.props.position,
+            right: this.props.duration - this.props.position,
+            position: parseInt(e.changedTouches[0].clientX),
+            width: this.refs.slider.getDOMNode().clientWidth
+          });
+
+        e.preventDefault();
+    },
+
+    _onTouchMove: function(e) {
+        var pos = parseInt(e.changedTouches[0].clientX);
+        var offset = this.props.duration * (pos - this.state.position) / this.state.width;
+
+        this.setState({
+            left: this.state.left + offset,
+            right: this.state.right - offset,
+            position: pos
+        });
+
+        e.preventDefault();
+    },
+
+    _onTouchEnd: function(e) {
+        Backend.Seek(this.state.left);
+
+        this.setState({
+            left: null,
+            right: null
+        });
+
+        e.preventDefault();
+    }
 });
 
 Clarinetto.controls.control = React.render(

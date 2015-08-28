@@ -9,8 +9,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".WebPageActivity"
-            android:label="@string/title_activity_web_page"
-            android:hardwareAccelerated="true" >
+            android:label="@string/title_activity_web_page" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

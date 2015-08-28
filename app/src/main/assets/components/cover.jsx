@@ -60,7 +60,7 @@ var Cover = React.createClass({
 
         return (
             <div style={styles.root}>
-                <img style={styles.image} src={this.props.image || "./images/cover.jpg"} />
+                <img style={styles.image} src={this.props.image} />
                 <div style={styles.coverOverlay} />
                 <div style={styles.coverOverlay2} />
                 <div style={styles.detail}>

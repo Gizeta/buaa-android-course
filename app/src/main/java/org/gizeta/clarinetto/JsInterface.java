@@ -11,7 +11,7 @@ public class JsInterface {
         mContext = c;
     }
 
-    public void Execute(final String code) {
+    public void Execute(String code) {
         ((WebPageActivity)mContext).loadJS(code);
     }
 
@@ -41,6 +41,11 @@ public class JsInterface {
     public void PlayNext() {
         backend.LoadNext();
         backend.Play();
+    }
+
+    @JavascriptInterface
+    public void Seek(int position) {
+        backend.Seek(position);
     }
 
     @JavascriptInterface
