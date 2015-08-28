@@ -40,8 +40,8 @@ var Control = React.createClass({
                 WebkitFlex: 1,
                 flex: 1,
                 margin: '0px 16px',
-                height: 4,
-                borderRadius: 2,
+                height: 6,
+                borderRadius: 3,
                 background: 'white'
             },
             leftTSlider: {
@@ -55,20 +55,20 @@ var Control = React.createClass({
                 flex: this.state.right || this.props.duration - this.props.position
             },
             tThumb: {
-                width: 10,
-                height: 10,
+                width: 16,
+                height: 16,
                 border: '2px solid white',
-                borderRadius: 7,
+                borderRadius: 10,
                 background: 'rgb(52, 111, 207)',
-                marginTop: -5
+                marginTop: -7
             },
             tThumbHover: {
-                width: 12,
-                height: 12,
+                width: 20,
+                height: 20,
                 border: '2px solid white',
-                borderRadius: 8,
+                borderRadius: 12,
                 background: 'rgb(255, 255, 255)',
-                marginTop: -6
+                marginTop: -9
             },
             buttons: {
             }

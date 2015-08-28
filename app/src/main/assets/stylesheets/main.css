@@ -14,11 +14,7 @@ a, div, span {
 }
 
 a {
-    color: black;
-}
-
-a:active {
-    -webkit-transform: scale3d(0.95, 0.9, 1);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
     color: black;
 }
 
